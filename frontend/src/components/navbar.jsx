@@ -169,7 +169,8 @@ export default function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{maxWidth: '1440px', margin: '20px auto', borderRadius: '16px' }}>
+      <AppBar position="static" sx={{width: 'calc(100% - 60px)', maxWidth:'2000px', padding: '0 20px', margin: '20px auto', borderRadius: '16px' }}>
+      
         <Toolbar>
           <IconButton
             size="large"
