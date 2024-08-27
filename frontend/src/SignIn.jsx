@@ -14,8 +14,9 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
 import axios from 'axios'
+import Palette, { theme } from './components/palette';
 
-const defaultTheme = createTheme();
+//const defaultTheme = createTheme();
 
 export default function SignIn() {
     const [email, setEmail] = useState()
@@ -35,7 +36,7 @@ export default function SignIn() {
     }
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
