@@ -14,7 +14,10 @@ export default function Dashboard() {
     <Box sx={containerStyle}>
       <Grid container spacing={2}>
         {/* Profile and Recommendations Column */}
-        <Grid item sx={{ width: 250 }}>
+        <Grid
+          item
+          sx={{ width: 250, position: "sticky", top: 2, alignSelf: "start" }}
+        >
           <ProfileCard />
           <RecommendationsCard />
         </Grid>
@@ -26,11 +29,19 @@ export default function Dashboard() {
             <FeedCard />
             <FeedCard />
             <FeedCard />
+            <FeedCard />
+            <FeedCard />
+            <FeedCard />
+            <FeedCard />
+            <FeedCard />
           </Box>
         </Grid>
 
         {/* Notifications Column */}
-        <Grid item sx={{ width: 250 }}>
+        <Grid
+          item
+          sx={{ width: 250, position: "sticky", top: 2, alignSelf: "start" }}
+        >
           <NotificationsCard />
         </Grid>
       </Grid>
