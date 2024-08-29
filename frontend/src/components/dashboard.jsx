@@ -309,17 +309,21 @@ export function NotificationsCard() {
         >
           Notifications
         </Typography>
-        <Divider sx={{ mb: 2 }} />
+        <Divider sx={{ mb: 2, mr: 2 }} />
         <Box sx={{ maxHeight: "650px", overflowY: "auto" }}>
           {notifications.map((notification, index) => (
-            <Typography
-              key={index}
-              variant="body2"
-              color="text.secondary"
-              mb={1}
-            >
-              {notification}
-            </Typography>
+            <Box>
+              <Typography
+                key={index}
+                variant="body2"
+                color="text.secondary"
+                mb={1}
+              >
+                {notification}
+              </Typography>
+
+              <Divider sx={{ mb: 2, mr: 2 }} />
+            </Box>
           ))}
         </Box>
       </CardContent>
