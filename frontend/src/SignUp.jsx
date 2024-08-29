@@ -17,7 +17,8 @@ import axios from 'axios'
 import { theme } from './components/palette';
 import logo from './assets/logo.png'; 
 import { cardStyle } from './components/styles';
-import { Card, CardContent } from '@mui/material';
+import { Card, CardContent, CardMedia } from '@mui/material';
+import { AuthCard } from './components/authcard';
 
 
 const defaultTheme = createTheme();
@@ -39,38 +40,8 @@ function SignUp() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main">
-      <CssBaseline />
-        <Grid container spacing={2} sx={{ minHeight: '90vh', alignItems: 'center', justifyContent: 'center' }}>
-        <Card sx={cardStyle}>
-        <CardContent sx={{ display: 'flex', flexDirection: 'row', width: '100%', height: '100%' }}>
-          {/* Left Side: Logo Section */}
-          <Grid item xs={12} md={7} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: 'primary.main' }}>
-            {/* Add your logo image here */}
-            <Box
-              component="img"
-              sx={{
-                maxHeight: '100%',
-                maxWidth: '100%',
-                objectFit: 'fill',
-              }}
-              alt="Logo"
-              src={logo} // Update the path to your logo image
-            />
-          </Grid>
-
-          {/* Right Side: Sign-Up Form */}
-          <Grid item xs={12} md={5} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <Box sx={{ mx: 4 }}>
-              {/* <Card sx={cardStyle}>
-                <CardContent> */}
-                  <Typography variant="h3" mb={3} fontWeight={'bold'}>
-                    See who's Yapping
-                  </Typography>
-                  <Typography variant="h5" fontWeight={'bold'}>
-                    Ready to yap?
-                  </Typography>
-                  <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <AuthCard logosrc={logo} title="See who's Yapping" subtitle="Ready to yap?">
+                <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3, mr: 3 }}>
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
                         <TextField
@@ -83,7 +54,7 @@ function SignUp() {
                           onChange={(e) => setName(e.target.value)}
                         />
                       </Grid>
-                      <Grid item xs={12}>
+                     <Grid item xs={12}>
                         <TextField
                           required
                           fullWidth
@@ -93,49 +64,41 @@ function SignUp() {
                           autoComplete="email"
                           onChange={(e) => setEmail(e.target.value)}
                         />
-                      </Grid>
-                      <Grid item xs={12}>
-                        <TextField
-                          required
-                          fullWidth
-                          name="password"
-                          label="Password"
-                          type="password"
-                          id="password"
-                          autoComplete="new-password"
-                          onChange={(e) => setPassword(e.target.value)}
-                        />
-                      </Grid>
                     </Grid>
-                    <Button
-                      type="submit"
+                    <Grid item xs={12}>
+                      <TextField
+                      required
                       fullWidth
-                      variant="contained"
-                      sx={{ mt: 3, mb: 2, 
-                        color: 'white', 
-                        borderRadius: '17px', 
-                        boxShadow: 2,
-                        padding: 1.2, }}
-                    >
-                      Sign Up
-                    </Button>
-                    <Grid container justifyContent="flex-end">
-                      <Grid item>
-                        <Link to='/signin' variant="body2">
-                          Already have an account? Sign in
-                        </Link>
-                      </Grid>
+                      name="password"
+                      label="Password"
+                      type="password"
+                      id="password"
+                      autoComplete="new-password"
+                      onChange={(e) => setPassword(e.target.value)}
+                      />
                     </Grid>
-                  </Box>
-                 {/* </CardContent>
-              </Card> */}
-            </Box>
-
-          </Grid>
-          </CardContent>
-              </Card>
-        </Grid>
-      </Container>
+                  </Grid>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2, 
+                    color: 'white', 
+                    borderRadius: '17px', 
+                    boxShadow: 2,
+                    padding: 1.2, }}
+                  >
+                    Sign Up
+                  </Button>
+                  <Grid container justifyContent="flex-end" sx={{mb: 3}}>
+                    <Grid item>
+                      <Link to='/signin' variant="body2">
+                        Already have an account? Sign in
+                      </Link>
+                  </Grid>
+                </Grid>
+              </Box>
+        </AuthCard>
    </ThemeProvider>
   );
 }

@@ -15,6 +15,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
 import axios from 'axios'
 import Palette, { theme } from './components/palette';
+import { AuthCard } from './components/authcard';
+import logo from './assets/logo.png'
 
 //const defaultTheme = createTheme();
 
@@ -37,45 +39,36 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
+        <AuthCard logosrc={logo} title="Welcome back to Yapper!" subtitle="Sign in">
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3, mr: 3 }}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </Grid>
+            </Grid>
             {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
@@ -84,11 +77,15 @@ export default function SignIn() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, 
+              color: 'white', 
+              borderRadius: '17px', 
+              boxShadow: 2,
+              padding: 1.2, }}
             >
               Sign In
             </Button>
-            <Grid container>
+            <Grid container justifyContent="flex-end" sx={{mb: 3}}>
               {/* <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
@@ -101,8 +98,7 @@ export default function SignIn() {
               </Grid>
             </Grid>
           </Box>
-        </Box>
-      </Container>
+        </AuthCard>
     </ThemeProvider>
   );
 }
