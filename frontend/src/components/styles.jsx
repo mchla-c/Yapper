@@ -3,7 +3,7 @@ import { Button } from '@mui/material';
 
 export const containerStyle = {
     width: 'calc(100% - 60px)',
-    maxWidth: '2000px',
+    maxWidth: '1410px',
     padding: '0 20px',
     margin: '20px auto',
     borderRadius: '16px',

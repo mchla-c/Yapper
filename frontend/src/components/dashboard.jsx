@@ -19,7 +19,7 @@ import AddIcon from "@mui/icons-material/Add";
 // Profile Component
 export function ProfileCard() {
   return (
-    <Card sx={{ ...cardStyle, height: 400, mb: 2, padding: 2 }}>
+    <Card sx={{ ...cardStyle, height: 350, mb: 2, padding: 2 }}> {/*initially 400? */}
       <CardContent>
         <Box
           display="flex"
@@ -49,9 +49,9 @@ export function ProfileCard() {
           </Box>
         </Box>
         <Divider sx={{ mb: 2 }} />
-        <Typography variant="body2" sx={{ mb: 2 }}>
+        {/* <Typography variant="body2" sx={{ mb: 2 }}>
           Bio: A short bio describing yourself in a few sentences.
-        </Typography>
+        </Typography> */}
         <CustomButton href="/Profile">Edit Profile</CustomButton>
       </CardContent>
     </Card>
@@ -300,7 +300,7 @@ export function NotificationsCard() {
   const notifications = ["Notification 1", "Notification 2", "Notification 3"];
 
   return (
-    <Card sx={{ ...cardStyle, padding: 2, height: 780 }}>
+    <Card sx={{ ...cardStyle, padding: 2, height: 730 }}> {/*initially 780 */}
       <CardContent>
         <Typography
           justifyContent="center"
