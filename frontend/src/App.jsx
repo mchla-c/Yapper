@@ -5,7 +5,7 @@ import './App.css'
 import SignUp from './SignUp'
 import { CssBaseline, Typography } from '@mui/material'
 import SignIn from './SignIn'
-import {BrowserRouter, Routes, Route, useLocation} from 'react-router-dom'
+import {BrowserRouter, Routes, Route, useLocation, Navigate} from 'react-router-dom'
 import Home from './Home'
 import Navbar from './components/navbar'
 import Palette from './components/palette'
@@ -22,6 +22,7 @@ function App() {
     <BrowserRouter>
     <ConditionalNavbar/>
       <Routes>
+        <Route pathm='/' element={<Navigate to='/signup'/>}/>
         <Route path='/signup' element={<SignUp/>}></Route>
         <Route path='/signin' element={<SignIn/>}></Route>
         <Route path='/home' element={<Home/>}></Route>
