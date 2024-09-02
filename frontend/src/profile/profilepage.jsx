@@ -5,7 +5,6 @@ import { cardStyle, CustomButton } from "../components/styles"
 
 export const MainProfileCard = ({avatarsrc, name, userid, location, numFollowers, numFollowing, bio}) => {
     return (
-        <Box sx={{ position: 'sticky', top: '60px' }}>
             <Card sx={[cardStyle, {height: 500, maxHeight: 500}]}>
                 <CardContent>
                     {/* Avatar at the top */}
@@ -72,11 +71,14 @@ export const MainProfileCard = ({avatarsrc, name, userid, location, numFollowers
                     </Box>
                 </CardContent>
             </Card>
+    )
+}
 
-            <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3, marginTop: 2 }}>
+export const NotUserButtons = () => {
+    return (
+        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3, marginTop: 2 }}>
                 <CustomButton>Follow</CustomButton>
                 <CustomButton>Message</CustomButton>
-            </Box>
         </Box>
     )
 }
@@ -106,3 +108,4 @@ export const FriendList = ({friends}) => {
         </Box>
     )
 }
+

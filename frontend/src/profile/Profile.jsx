@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Facebook, Twitter, Instagram, LinkedIn, LocationOn, Wc } from '@mui/icons-material';
 import { containerStyle, cardStyle, CustomButton } from '../components/styles';
 import { FeedCard, ProfileCard } from '../components/Dashboard';
-import { FriendList, MainProfileCard } from './profilepage';
+import { FriendList, MainProfileCard, NotUserButtons } from './profilepage';
 
 
 export default function Profile() {
@@ -28,15 +28,18 @@ export default function Profile() {
         <Grid container spacing={3}>
             {/* Left: Fixed Profile Card */}
             <Grid item xs={12} md={3}>
-                <MainProfileCard
-                    avatarsrc={''}
-                    name={'John Doe'}
-                    userid={'johndoe'}
-                    location={'LA'}
-                    numFollowers={'50'}
-                    numFollowing={'10'}
-                    bio={'This is bio'}
-                />
+                <Box sx={{ position: 'sticky', top: '60px' }}>
+                    <MainProfileCard
+                        avatarsrc={''}
+                        name={'John Doe'}
+                        userid={'johndoe'}
+                        location={'LA'}
+                        numFollowers={'50'}
+                        numFollowing={'10'}
+                        bio={'This is bio'}
+                    />
+                    <NotUserButtons/>
+                </Box>
             </Grid>
 
             {/* Right: Dynamic Card Posts */}

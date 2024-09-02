@@ -13,6 +13,7 @@ import Messages from './messages/Messages'
 import Profile from './profile/Profile'
 import Dashboard from './Dashboard'
 import Explore from './Explore'
+import Settings from './settings/Settings'
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
         <Route path='/profile' element={<Profile/>}></Route>
         <Route path='/dashboard' element={<Dashboard/>}></Route>
         <Route path='/explore' element={<Explore/>}></Route>
+        <Route path='/settings' element={<Settings/>}></Route>
       </Routes>
     </BrowserRouter>
     </>
