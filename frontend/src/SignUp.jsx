@@ -19,24 +19,56 @@ import logo from './assets/logo.png';
 import { cardStyle } from './components/styles';
 import { Card, CardContent, CardMedia } from '@mui/material';
 import { AuthCard } from './components/authcard';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 
 const defaultTheme = createTheme();
 
 function SignUp() {
-    const [name, setName] = useState()
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
-    const navigate = useNavigate()
+    const [formData, setFormData] = useState({
+      email: "",
+      username: "",
+      fullName: "",
+      password: "",
+    });
+
+    const {mutate, isError, isPending, error} = useMutation({
+      mutationFn: async({fullName, username, email, password}) => {
+        try {
+          const res = await fetch("/api/auth/signup", {
+            method: "POST",
+            headers: {
+              "Contend-Type": "application/json"
+            },
+            body: JSON.stringify(fullName, username, email, password)
+          })
+
+          
+          const data = await res.json()
+          if (!res.ok) throw new Error(data.error || "Failed to create account")
+          console.log(data)
+          return data
+        } catch (error) {
+          console.log(error)
+          throw error
+        }
+      },
+
+      onSuccess: () => {
+        toast.success("Account created successfully")
+      }
+    })
+    
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:3001/signup', {name, email, password})
-        .then(result => {console.log(result)
-            navigate('/home')
-        })
-        .catch(err => console.log(err))
+        mutate(formData)
     }
+
+    const handleInputChange = (e) => {
+      setFormData({...formData, [e.target.name]: e.target.value})
+    }
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -47,13 +79,26 @@ function SignUp() {
                         <TextField
                           required
                           fullWidth
-                          id="name"
+                          id="fullName"
                           label="Full Name"
-                          name="name"
+                          name="fullName"
                           autoComplete="family-name"
-                          onChange={(e) => setName(e.target.value)}
+                          value={formData.fullName}
+                          onChange={handleInputChange}
                         />
                       </Grid>
+                      <Grid item xs={12}>
+                        <TextField
+                          required
+                          fullWidth
+                          id="username"
+                          label="Username"
+                          name="username"
+                          autoComplete="username"
+                          value={formData.username}
+                          onChange={handleInputChange}
+                        />
+                    </Grid>
                      <Grid item xs={12}>
                         <TextField
                           required
@@ -62,19 +107,21 @@ function SignUp() {
                           label="Email Address"
                           name="email"
                           autoComplete="email"
-                          onChange={(e) => setEmail(e.target.value)}
+                          value={formData.email}
+                          onChange={handleInputChange}
                         />
                     </Grid>
                     <Grid item xs={12}>
                       <TextField
-                      required
-                      fullWidth
-                      name="password"
-                      label="Password"
-                      type="password"
-                      id="password"
-                      autoComplete="new-password"
-                      onChange={(e) => setPassword(e.target.value)}
+                        required
+                        fullWidth
+                        name="password"
+                        label="Password"
+                        type="password"
+                        id="password"
+                        autoComplete="new-password"
+                        value={formData.password}
+                        onChange={handleInputChange}
                       />
                     </Grid>
                   </Grid>
@@ -88,8 +135,9 @@ function SignUp() {
                     boxShadow: 2,
                     padding: 1.2, }}
                   >
-                    Sign Up
+                    {isPending ? "Loading..." : "Sign Up"}
                   </Button>
+                  {isError && <Typography color={'red'}>{error.message}</Typography>}
                   <Grid container justifyContent="flex-end" sx={{mb: 3}}>
                     <Grid item>
                       <Link to='/signin' variant="body2">

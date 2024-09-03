@@ -21,6 +21,7 @@ import { Link } from 'react-router-dom';
 import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneRounded';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -69,6 +70,33 @@ export default function Navbar() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  const queryClient = useQueryClient()
+
+  const {mutate: signout} = useMutation({
+    mutationFn: async() => {
+      try {
+        const res = await fetch("/api/auth/signout", {
+          method: "POST"
+        })
+
+        const data = await res.json()
+
+        if (!res.ok) {
+          throw new Error(data.error || "Something went wrong")
+        }
+
+      } catch (error) {
+        throw new Error(error)
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ['authUser']})
+    },
+    onError: () => {
+      toast.error("Sign out failed")
+    }
+  })
+
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -105,6 +133,13 @@ export default function Navbar() {
     >
       <MenuItem component={Link} to='/profile' onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem component={Link} to='/settings' onClick={handleMenuClose}>Settings</MenuItem>
+      <MenuItem 
+        onClick={(e) => {
+          e.preventDefault()
+          signout()
+        }}>
+          Sign out
+      </MenuItem>
     </Menu>
   );
 

@@ -17,25 +17,54 @@ import axios from 'axios'
 import Palette, { theme } from './components/palette';
 import { AuthCard } from './components/authcard';
 import logo from './assets/logo.png'
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 //const defaultTheme = createTheme();
 
 export default function SignIn() {
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
-    const navigate = useNavigate()
+    const [formData, setFormData] = useState({
+      username: "",
+      password: "",
+    });
+
+    const queryClient = useQueryClient()
+
+    const {mutate: signin, isPending, isError, error} = useMutation({
+      mutationFn: async({username, password}) => {
+        try {
+          const res = await fetch("/api/auth/signin", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({username, password})
+          })
+
+          const data = await res.json()
+
+          if (!res.ok) {
+            throw new Error(data.error || "Something went wrong")
+          }
+
+          
+        } catch (error) {
+          throw new Error(error)
+        }
+      },
+      onSuccess: () => {
+        // toast.success("Login Successful")
+        queryClient.invalidateQueries({queryKey: ["authUser"]})
+      }
+    })
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:3001/signin', {email, password})
-        .then(result => {
-            console.log(result)
-            if (result.data === "Success") {
-                navigate('/home')
-            }
-        })
-        .catch(err => console.log(err))
+        signin(formData)
     }
+
+    const handleInputChange = (e) => {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
   return (
     <ThemeProvider theme={theme}>
@@ -47,12 +76,13 @@ export default function SignIn() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="username"
+                label="USername"
+                name="username"
+                autoComplete="username"
                 autoFocus
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleInputChange}
+							  value={formData.username}
               />
             </Grid>
               <Grid item xs={12}>
@@ -65,7 +95,8 @@ export default function SignIn() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={handleInputChange}
+							    value={formData.password}
                 />
               </Grid>
             </Grid>
@@ -83,8 +114,9 @@ export default function SignIn() {
               boxShadow: 2,
               padding: 1.2, }}
             >
-              Sign In
+              {isPending ? "Loading..." : "Sign In"}
             </Button>
+            {isError && <Typography color={'red'}>{error.message}</Typography>}
             <Grid container justifyContent="flex-end" sx={{mb: 3}}>
               {/* <Grid item xs>
                 <Link href="#" variant="body2">

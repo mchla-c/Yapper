@@ -6,7 +6,6 @@ import SignUp from './SignUp'
 import { CssBaseline, Typography } from '@mui/material'
 import SignIn from './SignIn'
 import {BrowserRouter, Routes, Route, useLocation, Navigate} from 'react-router-dom'
-import Home from './Home'
 import Navbar from './components/navbar'
 import Palette from './components/palette'
 import Messages from './messages/Messages'
@@ -14,41 +13,56 @@ import Profile from './profile/Profile'
 import Dashboard from './Dashboard'
 import Explore from './Explore'
 import Settings from './settings/Settings'
+import { Toaster } from 'react-hot-toast'
+import { useQuery } from '@tanstack/react-query'
 
 function App() {
+
+  const {data: authUser, isLoading} = useQuery({
+    queryKey: ['authUser'],
+    queryFn: async() => {
+      try {
+        const res = await fetch("/api/auth/me")
+        const data = await res.json()
+
+        if(data.error) return null
+
+        if (!res.ok) {
+          throw new Error(data.error || "Something went wrong")
+        }
+        console.log("authUser is here:", data)
+        return data
+
+      } catch (error) {
+        throw new Error(error)
+      }
+    },
+    retry: false
+  })
+
+  // MAKE LOADING SCREEN
+  if (isLoading) {
+    return (
+      <Typography> LOADING SCREEN </Typography>
+    )
+  }
 
   return (
     <>
     <CssBaseline/>
-    <BrowserRouter>
-    <ConditionalNavbar/>
+    {authUser && <Navbar/>}
       <Routes>
-        <Route pathm='/' element={<Navigate to='/signup'/>}/>
-        <Route path='/signup' element={<SignUp/>}></Route>
-        <Route path='/signin' element={<SignIn/>}></Route>
-        <Route path='/home' element={<Home/>}></Route>
-        <Route path='/messages' element={<Messages/>}></Route>
-        <Route path='/profile' element={<Profile/>}></Route>
-        <Route path='/dashboard' element={<Dashboard/>}></Route>
-        <Route path='/explore' element={<Explore/>}></Route>
-        <Route path='/settings' element={<Settings/>}></Route>
+        <Route path='/' element={authUser ? <Dashboard/> : <Navigate to='/signin'/>}/>
+        <Route path='/signup' element={!authUser ? <SignUp/> : <Navigate to='/'/>}></Route>
+        <Route path='/signin' element={!authUser ? <SignIn/> : <Navigate to='/'/>}></Route>
+        <Route path='/messages' element={authUser ? <Messages/> : <Navigate to='/signin'/>}></Route>
+        <Route path='/profile' element={authUser ? <Profile/> : <Navigate to='/signin'/>}></Route>
+        <Route path='/explore' element={authUser ? <Explore/> : <Navigate to='/signin'/>}></Route>
+        <Route path='/settings' element={authUser ? <Settings/> : <Navigate to='/signin'/>}></Route>
       </Routes>
-    </BrowserRouter>
+      <Toaster/>
     </>
   )
-}
-
-function ConditionalNavbar() {
-  const location = useLocation();
-  // Define paths where Navbar should not be displayed
-  const hideNavbarPaths = ['/signup', '/signin'];
-
-  // If the current path is in the hideNavbarPaths array, don't render the Navbar
-  if (hideNavbarPaths.includes(location.pathname)) {
-    return null;
-  }
-
-  return <Navbar />;
 }
 
 export default App

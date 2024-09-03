@@ -5,9 +5,11 @@ import { Facebook, Twitter, Instagram, LinkedIn, LocationOn, Wc } from '@mui/ico
 import { containerStyle, cardStyle, CustomButton } from '../components/styles';
 import { FeedCard, ProfileCard } from '../components/Dashboard';
 import { FriendList, MainProfileCard, NotUserButtons } from './profilepage';
+import { useQuery } from '@tanstack/react-query';
 
 
 export default function Profile() {
+    const {data: authUser} = useQuery({queryKey: ["authUser"]})
 
   const [tabValue, setTabValue] = useState(0);
 
