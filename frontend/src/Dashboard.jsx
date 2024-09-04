@@ -7,7 +7,7 @@ import {
   PostBar,
   FeedCard,
   NotificationsCard,
-} from "./components/Dashboard";
+} from "./components/dashboard";
 
 export default function Dashboard() {
   return (
@@ -26,13 +26,6 @@ export default function Dashboard() {
         <Grid item xs>
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <PostBar />
-            <FeedCard />
-            <FeedCard />
-            <FeedCard />
-            <FeedCard />
-            <FeedCard />
-            <FeedCard />
-            <FeedCard />
             <FeedCard />
           </Box>
         </Grid>
