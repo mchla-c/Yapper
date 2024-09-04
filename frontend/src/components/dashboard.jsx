@@ -162,7 +162,7 @@ export function ProfileCard() {
         <Typography variant="body2" sx={{ mb: 2 }}>
           {userData?.bio || "bio"}
         </Typography>
-        <CustomButton href="/Profile">Edit Profile</CustomButton>
+        <CustomButton href={`/profile/${userData?.username}`}>Edit Profile</CustomButton>
       </CardContent>
     </Card>
   );
@@ -336,6 +336,8 @@ export function PostBar() {
     </Card>
   );
 }
+
+
 
 // Feed Component
 export function FeedCard() {

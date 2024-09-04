@@ -20,6 +20,7 @@ import { cardStyle } from './components/styles';
 import { Card, CardContent, CardMedia } from '@mui/material';
 import { AuthCard } from './components/authcard';
 import { useMutation, useQuery } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 
 
 const defaultTheme = createTheme();
@@ -38,9 +39,9 @@ function SignUp() {
           const res = await fetch("/api/auth/signup", {
             method: "POST",
             headers: {
-              "Contend-Type": "application/json"
+              "Content-Type": "application/json"
             },
-            body: JSON.stringify(fullName, username, email, password)
+            body: JSON.stringify({fullName, username, email, password})
           })
 
           
@@ -56,6 +57,7 @@ function SignUp() {
 
       onSuccess: () => {
         toast.success("Account created successfully")
+        queryClient.invalidateQueries({queryKey: ["authUser"]})
       }
     })
     

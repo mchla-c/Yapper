@@ -1,6 +1,8 @@
 import { Facebook, Instagram, LinkedIn, LocationOn, Twitter } from "@mui/icons-material"
 import { Avatar, Box, Card, CardContent, Divider, IconButton, Typography } from "@mui/material"
 import { cardStyle, CustomButton } from "../components/styles"
+import { Link } from "react-router-dom"
+import useFollow from "../hooks/useFollow"
 
 
 export const MainProfileCard = ({avatarsrc, name, userid, location, numFollowers, numFollowing, bio}) => {
@@ -79,6 +81,15 @@ export const NotUserButtons = () => {
         <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3, marginTop: 2 }}>
                 <CustomButton>Follow</CustomButton>
                 <CustomButton>Message</CustomButton>
+        </Box>
+    )
+}
+
+export const UserButtons = () => {
+    return (
+        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3, marginTop: 2 }}>
+                <CustomButton component={Link} to="/settings">Edit</CustomButton>
+                <CustomButton>Share</CustomButton>
         </Box>
     )
 }

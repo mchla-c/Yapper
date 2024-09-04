@@ -63,6 +63,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -131,7 +132,7 @@ export default function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem component={Link} to='/profile' onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem component={Link} to={`/profile`} onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem component={Link} to='/settings' onClick={handleMenuClose}>Settings</MenuItem>
       <MenuItem 
         onClick={(e) => {
@@ -220,7 +221,7 @@ export default function Navbar() {
             variant="h6"
             noWrap
             sx={{ display: { xs: 'none', sm: 'block' }, fontWeight: 'bold' }}
-            component={Link} to='/dashboard'
+            component={Link} to='/'
             style={{textDecoration: 'none'}}
             color='#322f35'
           >
