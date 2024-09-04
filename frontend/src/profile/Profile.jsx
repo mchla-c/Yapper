@@ -25,7 +25,7 @@ import {
   Wc,
 } from "@mui/icons-material";
 import { containerStyle, cardStyle, CustomButton } from "../components/styles";
-import { FeedCard, ProfileCard } from "../components/dashboard";
+import { FeedCard, ProfileCard } from "../components/Dashboard";
 import { FriendList, MainProfileCard, NotUserButtons } from "./profilepage";
 import { useQuery } from "@tanstack/react-query";
 
