@@ -43,14 +43,14 @@ export default function Profile() {
   };
 
   const friends = [
-    { name: 'Alice', imageUrl: '' },
-    { name: 'Bob', imageUrl: '' },
-    { name: 'Charlie', imageUrl: '' },
-    { name: 'Dave', imageUrl: '' }, // Initials will be shown if no image
-    { name: 'Eve', imageUrl: '' },
-  ]
+    { name: "Alice", imageUrl: "" },
+    { name: "Bob", imageUrl: "" },
+    { name: "Charlie", imageUrl: "" },
+    { name: "Dave", imageUrl: "" }, // Initials will be shown if no image
+    { name: "Eve", imageUrl: "" },
+  ];
 
-    return(
+  return (
     <Box sx={containerStyle}>
         <Grid container spacing={3}>
             {/* Left: Fixed Profile Card */}
@@ -69,38 +69,42 @@ export default function Profile() {
                 </Box>
             </Grid>
 
-            {/* Right: Dynamic Card Posts */}
-            <Grid item xs={12} md={9}>
-                <FriendList friends={friends}/>
+        {/* Right: Dynamic Card Posts */}
+        <Grid item xs={12} md={9}>
+          <FriendList friends={friends} />
 
-                    {/* Mini Navbar for Posts, Likes, and Search */}
-                <Box mb={3}>
-                    <Card sx={cardStyle}>
-                        <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
-                            {/* Tabs for Posts and Likes */}
-                            <Tabs value={tabValue} onChange={handleTabChange} sx={{ flexGrow: 1 }}>
-                                <Tab label="Posts" />
-                                <Tab label="Likes" />
-                            </Tabs>
+          {/* Mini Navbar for Posts, Likes, and Search */}
+          <Box mb={3}>
+            <Card sx={cardStyle}>
+              <CardContent sx={{ display: "flex", alignItems: "center" }}>
+                {/* Tabs for Posts and Likes */}
+                <Tabs
+                  value={tabValue}
+                  onChange={handleTabChange}
+                  sx={{ flexGrow: 1 }}
+                >
+                  <Tab label="Posts" />
+                  <Tab label="Likes" />
+                </Tabs>
 
-                            {/* Search Bar */}
-                            <TextField 
-                                variant="outlined" 
-                                size="small" 
-                                placeholder="Search..." 
-                                sx={{ marginLeft: '20px', width: '300px' }} 
-                            />
-                        </CardContent>
-                    </Card>
-                </Box>
+                {/* Search Bar */}
+                <TextField
+                  variant="outlined"
+                  size="small"
+                  placeholder="Search..."
+                  sx={{ marginLeft: "20px", width: "300px" }}
+                />
+              </CardContent>
+            </Card>
+          </Box>
 
-                {[1, 2, 3, 4, 5, 6].map((post, index) => (
-                <Box key={index} mb={2}>
-                    <FeedCard/>
-                </Box>
-                ))}
-            </Grid>
+          {[1, 2, 3, 4, 5, 6].map((post, index) => (
+            <Box key={index} mb={2}>
+              <FeedCard />
+            </Box>
+          ))}
         </Grid>
-      </Box>
-    )
-} 
+      </Grid>
+    </Box>
+  );
+}
