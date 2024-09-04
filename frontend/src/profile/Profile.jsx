@@ -1,15 +1,40 @@
 import { Box, Container, Grid, Typography, Card, CardContent, Divider, Tab, Tabs, TextField, AvatarGroup, Avatar, IconButton, Button } from '@mui/material'
-import React from 'react' 
+import React, { useEffect } from 'react' 
 import { useState } from 'react';
 import { Facebook, Twitter, Instagram, LinkedIn, LocationOn, Wc } from '@mui/icons-material';
 import { containerStyle, cardStyle, CustomButton } from '../components/styles';
 import { FeedCard, ProfileCard } from '../components/Dashboard';
-import { FriendList, MainProfileCard, NotUserButtons } from './profilepage';
+import { FriendList, MainProfileCard, NotUserButtons } from './profileComponents';
 import { useQuery } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
 
 
 export default function Profile() {
-    const {data: authUser} = useQuery({queryKey: ["authUser"]})
+    const {username} = useParams()
+
+    const {data: user, isLoading, refetch, isRefetching} = useQuery({
+        queryKey: ["userProfile"],
+        queryFn: async () => {
+            try {
+                const res = await fetch(`/api/users/profile/${username}`)
+                const data = await res.json()
+
+                if (!res.ok) {
+                    throw new Error(data.error || "Something went wrong")
+                }
+
+                return data
+            } catch (error) {
+                throw new Error(error)
+            }
+        }
+    })
+
+    //const memberSinceDate = formatMemberSinceDate(user?.createdAt)
+
+    useEffect(() => {
+        refetch()
+    }, [username, refetch])
 
   const [tabValue, setTabValue] = useState(0);
 
@@ -33,12 +58,12 @@ export default function Profile() {
                 <Box sx={{ position: 'sticky', top: '60px' }}>
                     <MainProfileCard
                         avatarsrc={''}
-                        name={'John Doe'}
-                        userid={'johndoe'}
-                        location={'LA'}
-                        numFollowers={'50'}
-                        numFollowing={'10'}
-                        bio={'This is bio'}
+                        name={user?.fullName}
+                        userid={user?.username}
+                        location={''}
+                        numFollowers={user?.followers.length}
+                        numFollowing={user?.following.length}
+                        bio={user?.bio}
                     />
                     <NotUserButtons/>
                 </Box>
