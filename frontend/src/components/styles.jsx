@@ -16,7 +16,7 @@ export const cardStyle = {
   boxShadow: 3,
 };
 
-export const CustomButton = ({ children, variant = "contained", ...props }) => {
+export const CustomButton = ({ children, variant = "contained",sx , ...props }) => {
   return (
     <Button
       variant={variant}
@@ -29,7 +29,7 @@ export const CustomButton = ({ children, variant = "contained", ...props }) => {
         padding: 1.2,
         // border: '1px solid #1E1E1E',
         textTransform: "none", // Prevent uppercase transformation
-        ...props.sx,
+        ...sx,
       }}
       {...props}
     >

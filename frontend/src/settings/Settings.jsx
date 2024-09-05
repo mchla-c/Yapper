@@ -1,6 +1,6 @@
 import { Box, Card, Divider, Grid, Tab, Tabs, Typography } from "@mui/material";
 import { cardStyle, containerStyle } from "../components/styles";
-import { EditPassword, EditProfile } from "./settingsPage";
+import { EditAvatar, EditPassword, EditProfile } from "./settingsPage";
 import { MainProfileCard } from "../profile/profileComponents";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -57,20 +57,23 @@ export default function Settings() {
                         numFollowers={user?.followers.length}
                         numFollowing={user?.following.length}
                         bio={user?.bio}
-                    /> {/* Your existing profile card */}
+                        sx={{width: "330px"}}
+                    /> 
                 </Grid>
 
                 <Grid item xs={12} md={9}>
-                    <Card sx={[cardStyle, {padding: 4}]}>
+                    <Card sx={[cardStyle, {padding: 4, display: 'flex', flexDirection: 'column', width: "1035px"}]}>
                         <Typography variant="h4" fontWeight={'bold'} sx={{mb: 2}}>Profile Settings</Typography>
                         <Tabs value={tabValue} onChange={handleTabChange} sx={{ flexGrow: 1, }}>
                                 <Tab label="Profile" />
                                 <Tab label="Auth" />
+                                <Tab label="Avatar" />
                             </Tabs>
 
                         <Divider/>
                         {tabValue === 0 && <EditProfile authUser={authUser}/>}
                         {tabValue === 1 && <EditPassword authUser={authUser}/>}
+                        {tabValue === 2 && <EditAvatar authUser={user}/>}
                     </Card>
                 </Grid>
             </Grid>

@@ -5,9 +5,9 @@ import { Link } from "react-router-dom"
 import useFollow from "../hooks/useFollow"
 
 
-export const MainProfileCard = ({avatarsrc, name, userid, location, numFollowers, numFollowing, bio}) => {
+export const MainProfileCard = ({sx, avatarsrc, name, userid, location, numFollowers, numFollowing, bio}) => {
     return (
-            <Card sx={[cardStyle, {height: 500, maxHeight: 500}]}>
+            <Card sx={[cardStyle, {height: 500, maxHeight: 500, ...sx}]}>
                 <CardContent>
                     {/* Avatar at the top */}
                     <Avatar 

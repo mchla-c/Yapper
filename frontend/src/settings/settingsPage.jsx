@@ -1,8 +1,8 @@
-import { Box, Button, Card, Divider, Grid, TextField, Typography } from "@mui/material"
+import { Avatar, Box, Button, Card, Divider, Grid, TextField, Typography } from "@mui/material"
 import { MainProfileCard } from "../profile/profileComponents"
 import { cardStyle, CustomButton } from "../components/styles"
 import useUpdateProfile from "../hooks/useUpdateProfile"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 const EditProfileText = ({label}) => {
   return (
@@ -224,5 +224,61 @@ export const EditPassword = ({authUser}) => {
           </CustomButton>
         </Grid>
       </Box>
+  )
+}
+
+export const EditAvatar = ({user}) => {
+  const [profileImg, setProfileImg] = useState(null);
+  const profileImgRef = useRef(null)
+
+  const { isUpdatingProfile, updateProfile } = useUpdateProfile();
+
+  const handleImgChange = (e, state) => {
+		const file = e.target.files[0];
+		if (file) {
+			const reader = new FileReader();
+			reader.onload = () => {
+				// state === "coverImg" && setCoverImg(reader.result);
+				state === "profileImg" && setProfileImg(reader.result);
+			}
+			reader.readAsDataURL(file);
+		}
+	}
+
+  return (
+    <Box>
+      <Typography variant="h5" fontWeight={'bold'} sx={{mb: 2, mt: 2}}>Edit Avatar</Typography>
+      <Grid container>
+        <Grid item xs={6}>
+            <Avatar 
+              alt="User Name" 
+              src={profileImg || user?.profileImg || ''}
+              sx={{ width: 250, height: 250, margin: 5, marginTop: 5, marginLeft: 6 }} 
+              />
+          </Grid>
+          <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'column', mt: 11}}>
+            <CustomButton sx={{mb: 4}}
+            onClick={() => profileImgRef.current.click()}> 
+              Edit
+              <input
+              type="file"
+              style={{ display: 'none' }}
+              hidden
+              accept='image/*'
+              ref={profileImgRef}
+              onChange={(e) => handleImgChange(e, "profileImg")} // Hide the input element
+            />
+            </CustomButton>
+            <CustomButton
+              onClick={async () => {
+                await updateProfile({ profileImg });
+                setProfileImg(null);
+              }}
+            > 
+              {isUpdatingProfile ? "Updating..." : "Save Changes"}
+            </CustomButton>
+          </Grid>
+        </Grid>
+    </Box>
   )
 }
