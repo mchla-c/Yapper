@@ -1,13 +1,12 @@
 import React from "react";
 import { Box, Grid } from "@mui/material";
 import { containerStyle } from "./components/styles";
-import {
-  ProfileCard,
-  RecommendationsCard,
-  PostBar,
-  FeedCard,
-  NotificationsCard,
-} from "./components/dashboard";
+
+import { Recommendations } from "./components/Home/Recommendations";
+import { ProfileCard } from "./components/Home/ProfileCard";
+import { CreatePost } from "./components/Home/CreatePost";
+import { NotificationsCard } from "./components/Home/Notif";
+import Posts from "./components/common/Posts";
 
 export default function Dashboard() {
   return (
@@ -19,14 +18,14 @@ export default function Dashboard() {
           sx={{ width: 250, position: "sticky", top: 2, alignSelf: "start" }}
         >
           <ProfileCard />
-          <RecommendationsCard />
+          <Recommendations />
         </Grid>
 
         {/* Post Bar and Feed Column */}
         <Grid item xs>
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-            <PostBar />
-            <FeedCard />
+            <CreatePost />
+            <Posts />
           </Box>
         </Grid>
 
