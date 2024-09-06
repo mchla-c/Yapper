@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React from "react";
 import {
   Typography,
@@ -90,21 +91,32 @@ export function NotificationsCard() {
         <Box sx={{ maxHeight: 670, overflowY: "auto", ml: 1 }}>
           {notifications.map((notification) => (
             <Box key={notification._id} mb={2}>
-              <Box display="flex" alignItems="center">
-                <Avatar
-                  sx={{ width: 40, height: 40, borderRadius: "50%" }}
-                  src={notification.from.profileImg || "/profile-picture.jpg"}
-                  alt={`Profile picture`}
-                />
-                <Box ml={2} sx={{ flexGrow: 1 }}>
-                  <Typography variant="body1" sx={{ fontWeight: "bold" }}>
-                    {notification.from.fullName || "Name"}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    @{notification.from.username || "username"}
-                  </Typography>
+              <Link
+                to={`/profile/${notification.from.username}`}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  textDecoration: "none",
+                  color: "inherit",
+                }}
+              >
+                <Box display="flex" alignItems="center">
+                  <Avatar
+                    sx={{ width: 40, height: 40, borderRadius: "50%" }}
+                    src={notification.from.profileImg || "/profile-picture.jpg"}
+                    alt={`Profile picture`}
+                  />
+                  <Box ml={2} sx={{ flexGrow: 1 }}>
+                    <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+                      {notification.from.fullName || "Name"}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      @{notification.from.username || "username"}
+                    </Typography>
+                  </Box>
                 </Box>
-              </Box>
+              </Link>
               <Typography variant="body2" color="text.secondary" mt={1}>
                 {notification.type === "follow"
                   ? "has started following you"

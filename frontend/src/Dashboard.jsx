@@ -15,7 +15,7 @@ export default function Dashboard() {
         {/* Profile and Recommendations Column */}
         <Grid
           item
-          sx={{ width: 250, position: "sticky", top: 2, alignSelf: "start" }}
+          sx={{ width: 250, position: "sticky", top: 60, alignSelf: "start" }}
         >
           <ProfileCard />
           <Recommendations />
@@ -32,7 +32,7 @@ export default function Dashboard() {
         {/* Notifications Column */}
         <Grid
           item
-          sx={{ width: 250, position: "sticky", top: 2, alignSelf: "start" }}
+          sx={{ width: 250, position: "sticky", top: 60, alignSelf: "start" }}
         >
           <NotificationsCard />
         </Grid>
