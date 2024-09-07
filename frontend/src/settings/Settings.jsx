@@ -1,5 +1,5 @@
 import { Box, Card, Divider, Grid, Tab, Tabs, Typography } from "@mui/material";
-import { cardStyle, containerStyle } from "../components/styles";
+import { cardStyle, containerStyle, CustomButton } from "../components/styles";
 import { EditAvatar, EditPassword, EditProfile } from "./settingsPage";
 import { MainProfileCard } from "../profile/profileComponents";
 import { useEffect, useState } from "react";
@@ -49,6 +49,7 @@ export default function Settings() {
 
                 {/* Right side: Profile Card */}
                 <Grid item xs={12} md={3} position='sticky'>
+                  <Box>
                 <MainProfileCard
                         avatarsrc={user?.profileImg}
                         name={user?.fullName}
@@ -57,12 +58,19 @@ export default function Settings() {
                         numFollowers={user?.followers.length}
                         numFollowing={user?.following.length}
                         bio={user?.bio}
-                        sx={{width: "330px"}}
+                        sx={{width: "100%"}}
                     /> 
+                    </Box>
+                  <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 2 }}>
+                    <CustomButton href={`/profile/${user?.username}`}>
+                        Go to Profile 
+                    </CustomButton>
+                  </Box>
                 </Grid>
 
                 <Grid item xs={12} md={9}>
-                    <Card sx={[cardStyle, {padding: 4, display: 'flex', flexDirection: 'column', width: "1035px"}]}>
+                    <Box sx={{width: '100%'}}>
+                    <Card sx={[cardStyle, {padding: 4, display: 'flex', flexDirection: 'column', width: "100%"}]}>
                         <Typography variant="h4" fontWeight={'bold'} sx={{mb: 2}}>Profile Settings</Typography>
                         <Tabs value={tabValue} onChange={handleTabChange} sx={{ flexGrow: 1, }}>
                                 <Tab label="Profile" />
@@ -75,6 +83,7 @@ export default function Settings() {
                         {tabValue === 1 && <EditPassword authUser={authUser}/>}
                         {tabValue === 2 && <EditAvatar authUser={user}/>}
                     </Card>
+                    </Box>
                 </Grid>
             </Grid>
         </Box>

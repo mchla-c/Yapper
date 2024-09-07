@@ -56,7 +56,7 @@ export const UserChatBubble = ({ message, isSender }) => {
           maxWidth: '70%',
           padding: 1.7,
           borderRadius: '20px',
-          backgroundColor: isSender ? '#C397DA' : '#C6C6C6',
+          backgroundColor: isSender ? '#B79BB9' : '#ACB99B',
           color: '#fff',
           borderBottomRightRadius: isSender ? '0' : '20px',
           borderBottomLeftRadius: isSender ? '20px' : '0',

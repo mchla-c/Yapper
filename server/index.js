@@ -8,6 +8,9 @@ import connectMongoDB from "./db/connectMongoDB.js";
 import userRoutes from "./routes/user.routes.js";
 import postRoutes from "./routes/post.routes.js";
 import notificationRoutes from "./routes/notification.routes.js";
+import messageRoutes from "./routes/message.routes.js";
+
+import { app, server } from "./socket/socket.js";
 
 dotenv.config();
 
@@ -22,7 +25,6 @@ cloudinary.config({
 // const cors = require("cors")
 // const UsersModel = require('./models/users')
 
-const app = express();
 const PORT = process.env.PORT || 3001;
 // app.use(express.json())
 // app.use(cors())
@@ -40,6 +42,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/notifications", notificationRoutes);
+app.use("/api/messages", messageRoutes)
 
 // app.post("/signin", (req, res) => {
 //     const {email, password} = req.body
@@ -63,7 +66,7 @@ app.use("/api/notifications", notificationRoutes);
 //     .catch(err => res.json(err))
 // })
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log("Server is running");
   connectMongoDB();
 });

@@ -8,13 +8,13 @@ import SignIn from './SignIn'
 import {BrowserRouter, Routes, Route, useLocation, Navigate} from 'react-router-dom'
 import Navbar from './components/navbar'
 import Palette from './components/palette'
-import Messages from './messages/Messages'
 import Profile from './profile/Profile'
 import Dashboard from './Dashboard'
 import Explore from './Explore'
 import Settings from './settings/Settings'
 import { Toaster } from 'react-hot-toast'
 import { useQuery } from '@tanstack/react-query'
+import MessagesPg from './messages/MessagesPg'
 
 function App() {
 
@@ -55,7 +55,7 @@ function App() {
         <Route path='/' element={authUser ? <Dashboard/> : <Navigate to='/signin'/>}/>
         <Route path='/signup' element={!authUser ? <SignUp/> : <Navigate to='/'/>}></Route>
         <Route path='/signin' element={!authUser ? <SignIn/> : <Navigate to='/'/>}></Route>
-        <Route path='/messages' element={authUser ? <Messages/> : <Navigate to='/signin'/>}></Route>
+        <Route path='/messages' element={authUser ? <MessagesPg/> : <Navigate to='/signin'/>}></Route>
         <Route path='/profile/:username' element={authUser ? <Profile/> : <Navigate to='/signin'/>}></Route>
         <Route path='/explore' element={authUser ? <Explore/> : <Navigate to='/signin'/>}></Route>
         <Route path='/settings' element={authUser ? <Settings/> : <Navigate to='/signin'/>}></Route>

@@ -152,3 +152,23 @@ export const updateUser = async (req, res) => {
         res.status(500).json({error: error.message})
     }
 }
+
+export const getUsersForSidebar = async (req, res) => {
+    try {
+        const loggedInUserId = req.user._id
+
+        // gets all users except yourself
+        //const filteredUsers = await User.find({ _id: { $ne: loggedInUserId }}).select("-password")
+
+        const loggedInUser = await User.findById(loggedInUserId).populate('following');
+
+        const filteredUsers = await User.find({
+        _id: { $in: loggedInUser.following } // Filter for only the users being followed
+        }).select('-password');
+
+        res.status(200).json(filteredUsers)
+    } catch (error) {
+        console.log("Error in getUsersForSidebar: ", error.message)
+        res.status(500).json({error: error.message})
+    }
+}
