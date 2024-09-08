@@ -51,18 +51,18 @@ export const sendMessage = async (req, res) => {
 
 export const getMessages = async (req, res) => {
     try {
-        const {id: userToChatId} = req.params
-        const senderId = req.user._id
+        const { id: userToChatId } = req.params;
+		const senderId = req.user._id;
 
-        const conversation = await Conversation.findOne({
-            participants: {$all: [senderId, userToChatId]}
-        }).populate("messages")
+		const conversation = await Conversation.findOne({
+			participants: { $all: [senderId, userToChatId] },
+		}).populate("messages"); // NOT REFERENCE BUT ACTUAL MESSAGES
 
-        if (!conversation) return res.status(200).json([])
+		if (!conversation) return res.status(200).json([]);
 
-        const messages = conversation.messages
+		const messages = conversation.messages;
 
-        res.status(200).json(messages)
+		res.status(200).json(messages);
         
     } catch (error) {
         console.log("Error in getMessages function", error.message);

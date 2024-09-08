@@ -2,13 +2,14 @@ import useConversation from "../../zustand/useConversation"
 import { useSocketContext } from "../../context/SocketContext";
 import { Avatar, Box, Divider, IconButton, Typography } from "@mui/material";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import CircleIcon from '@mui/icons-material/Circle';
 
 const Conversation = ({conversation, lastIdx}) => {
     const {selectedConversation, setSelectedConversation} = useConversation()
 
-    const isSelected = selectedConversation?._id === Conversation._id
-    // const {onlineUsers} = useSocketContext()
-    // const isOnline = onlineUsers.includes(conversation._id)
+    const isSelected = selectedConversation?._id === conversation._id
+    const {onlineUsers} = useSocketContext()
+    const isOnline = onlineUsers.includes(conversation._id)
 
     return (
         <>
@@ -39,10 +40,9 @@ const Conversation = ({conversation, lastIdx}) => {
                     </Typography>
                 </Box>
 
-                <Box>
-                    <IconButton>
-                        <MoreVertIcon/>
-                    </IconButton>
+                <Box sx={{mr:1, mt: 1}}>
+                    <CircleIcon
+                    sx={{ color: isOnline ? '#A3BD4F' : '#bd4f6c', fontSize: 18 }}/>
                 </Box>
             </Box>
 

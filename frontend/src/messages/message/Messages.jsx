@@ -23,6 +23,7 @@ const Messages = () => {
         display: "flex",
         flexDirection: "column",
         padding: 2,
+        height: '100%'
       }}
     >
       {!loading &&

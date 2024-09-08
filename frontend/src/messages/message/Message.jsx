@@ -7,7 +7,7 @@ import useConversation from "../../zustand/useConversation"
 const Message = ({message}) => {
     const { authUser } = useAuthContext();
 	const { selectedConversation } = useConversation();
-	const fromMe = message.senderId === authUser._id;
+	const fromMe = message.senderId === authUser?._id;
 	const formattedTime = extractTime(message.createdAt);
 	const chatClassName = fromMe ? "chat-end" : "chat-start";
     const profileImg = fromMe ? authUser.profileImg : selectedConversation.profileImg
@@ -19,7 +19,7 @@ const Message = ({message}) => {
         <Box
         sx={{
             display: 'flex',
-            justifyContent: bubbleBgColor,
+            justifyContent: fromMe ? 'flex-end' : 'flex-start',
             mb: 2,
             mr: 1,
             ml: 1
@@ -32,7 +32,7 @@ const Message = ({message}) => {
                 maxWidth: '70%',
                 padding: 1.7,
                 borderRadius: '20px',
-                backgroundColor: isSender ? '#B79BB9' : '#ACB99B',
+                backgroundColor: bubbleBgColor,
                 color: '#fff',
                 borderBottomRightRadius: fromMe ? '0' : '20px',
                 borderBottomLeftRadius: fromMe ? '20px' : '0',

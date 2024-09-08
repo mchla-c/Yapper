@@ -42,11 +42,21 @@ const MessageContainer = () => {
                 flexDirection: "column",
                 maxHeight: "460px",
                 width: "100%",
+                minHeight: '75%'
             }}
             >
-                <Messages/>
-                <MessageInput/>
+                <Box
+                sx={{flexGrow: 1,
+                    overflowY: "auto",
+                    display: "flex",}}>
+                    <Messages/>
+                </Box>
             </Box>
+
+                <Box>
+                    <MessageInput/>
+                </Box>
+            
             </>)}
         </Card>
     )
@@ -57,8 +67,8 @@ export default MessageContainer
 const NoChatSelected = () => {
 
     return (
-        <Box>
-            <Typography>Select a chat to start messaging</Typography>
+        <Box sx={{m: '0 auto'}}>
+            <Typography variant="h5" sx={{ fontWeight: "bold", p: 2 }}>Select a chat to start messaging</Typography>
         </Box>
     )
 }
