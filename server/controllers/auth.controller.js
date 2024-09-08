@@ -107,18 +107,7 @@ export const signout = async (req, res) => {
 
 export const getMe = async (req, res) => {
   try {
-    const user = await User.findById(req.user._id)
-      .select("-password")
-      .populate({
-        path: "followers",
-        select:
-          "-password -email -followers -following -coverImg -bio -link -likedPosts -createdAt -updatedAt",
-      })
-      .populate({
-        path: "following",
-        select:
-          "-password -email -followers -following -coverImg -bio -link -likedPosts -createdAt -updatedAt",
-      });
+    const user = await User.findById(req.user._id).select("-password");
     res.status(200).json(user);
   } catch (error) {
     console.log("Error in getMe controller", error.message);
