@@ -1,8 +1,8 @@
 import useConversation from "../../zustand/useConversation"
-import { useSocketContext } from "../../context/SocketContext";
 import { Avatar, Box, Divider, IconButton, Typography } from "@mui/material";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CircleIcon from '@mui/icons-material/Circle';
+import { useSocketContext } from "../../context/SocketContext";
 
 const Conversation = ({conversation, lastIdx}) => {
     const {selectedConversation, setSelectedConversation} = useConversation()
@@ -10,6 +10,8 @@ const Conversation = ({conversation, lastIdx}) => {
     const isSelected = selectedConversation?._id === conversation._id
     const {onlineUsers} = useSocketContext()
     const isOnline = onlineUsers.includes(conversation._id)
+
+    console.log({onlineUsers})
 
     return (
         <>

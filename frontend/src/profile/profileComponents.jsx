@@ -3,6 +3,7 @@ import { Avatar, Box, Card, CardContent, Divider, IconButton, Typography } from 
 import { cardStyle, CustomButton } from "../components/styles"
 import { Link } from "react-router-dom"
 import useFollow from "../hooks/useFollow"
+import { useQuery } from "@tanstack/react-query"
 
 
 export const MainProfileCard = ({sx, avatarsrc, name, userid, location, numFollowers, numFollowing, bio}) => {
@@ -94,7 +95,9 @@ export const UserButtons = () => {
     )
 }
 
-export const FriendList = ({friends}) => {
+export const FriendList = ({authUser}) => {
+    const friends = authUser?.followers
+
     return(
         <Box mb={3}>
             <Card sx={cardStyle}>
@@ -104,13 +107,15 @@ export const FriendList = ({friends}) => {
                     <Box sx={{ display: 'flex', justifyContent: 'flex-start', mt: 2 }}>
                             {friends.map((friend, index) => (
                             <Avatar 
+                                component={Link}
+                                to={`/profile/${friend.username}`}
                                 key={index} 
-                                alt={friend.name} 
-                                src={friend.imageUrl} 
+                                alt={friend.fullName} 
+                                src={friend.profileImg} 
                                 style={{border: '0.5px solid #322F35'}}
                                 sx={{ width: 44, height: 44, marginRight: 1 }} // Adjust size if needed
                             >
-                                {friend.name[0]} {/* Fallback to initials if no image */}
+                                {/* Fallback to initials if no image */}
                             </Avatar>
                             ))}
                     </Box>

@@ -2,12 +2,13 @@ import { Box, Paper, Typography } from "@mui/material"
 import { useAuthContext } from "../../context/AuthContext"
 import { extractTime } from "../../utils/extractTime"
 import useConversation from "../../zustand/useConversation"
+import { useQuery } from "@tanstack/react-query"
 
 
 const Message = ({message}) => {
-    const { authUser } = useAuthContext();
+    const { data: authUser } = useQuery({ queryKey: ["authUser"] });
 	const { selectedConversation } = useConversation();
-	const fromMe = message.senderId === authUser?._id;
+	const fromMe = message.senderId === authUser._id;
 	const formattedTime = extractTime(message.createdAt);
 	const chatClassName = fromMe ? "chat-end" : "chat-start";
     const profileImg = fromMe ? authUser.profileImg : selectedConversation.profileImg

@@ -26,7 +26,7 @@ createRoot(document.getElementById('root')).render(
         <QueryClientProvider client ={queryClient}>
           <AuthContextProvider>
 				    <SocketContextProvider>
-            <App />
+              <App />
           </SocketContextProvider>
           </AuthContextProvider>
         </QueryClientProvider>
