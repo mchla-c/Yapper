@@ -7,7 +7,18 @@ export const getUserProfile = async (req, res) => {
   const { username } = req.params;
 
   try {
-    const user = await User.findOne({ username }).select("-password");
+    const user = await User.findOne({ username })
+      .select("-password")
+      .populate({
+        path: "followers",
+        select:
+          "-password -email -followers -following -coverImg -bio -link -likedPosts -createdAt -updatedAt",
+      })
+      .populate({
+        path: "following",
+        select:
+          "-password -email -followers -following -coverImg -bio -link -likedPosts -createdAt -updatedAt",
+      });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -165,24 +176,26 @@ export const updateUser = async (req, res) => {
     console.log("Error in updateUser: ", error.message);
     res.status(500).json({ error: error.message });
   }
-}
+};
 
 export const getUsersForSidebar = async (req, res) => {
-    try {
-        const loggedInUserId = req.user._id
+  try {
+    const loggedInUserId = req.user._id;
 
-        // gets all users except yourself
-        //const filteredUsers = await User.find({ _id: { $ne: loggedInUserId }}).select("-password")
+    // gets all users except yourself
+    //const filteredUsers = await User.find({ _id: { $ne: loggedInUserId }}).select("-password")
 
-        const loggedInUser = await User.findById(loggedInUserId).populate('following');
+    const loggedInUser = await User.findById(loggedInUserId).populate(
+      "following"
+    );
 
-        const filteredUsers = await User.find({
-        _id: { $in: loggedInUser.following } // Filter for only the users being followed
-        }).select('-password');
+    const filteredUsers = await User.find({
+      _id: { $in: loggedInUser.following }, // Filter for only the users being followed
+    }).select("-password");
 
-        res.status(200).json(filteredUsers)
-    } catch (error) {
-        console.log("Error in getUsersForSidebar: ", error.message)
-        res.status(500).json({error: error.message})
-    }
+    res.status(200).json(filteredUsers);
+  } catch (error) {
+    console.log("Error in getUsersForSidebar: ", error.message);
+    res.status(500).json({ error: error.message });
+  }
 };
