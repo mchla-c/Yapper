@@ -126,7 +126,7 @@ export default function Profile() {
 
         {/* Right: Dynamic Card Posts */}
         <Grid item xs={12} md={9}>
-          <FriendList authUser={user} />
+          <FriendList />
 
           {/* Mini Navbar for Posts, Likes, and Search */}
           <Box mb={3}>

@@ -140,8 +140,9 @@ export const UserButtons = () => {
   );
 };
 
-export const FriendList = ({ authUser }) => {
-  const friends = authUser?.followers;
+export const FriendList = () => {
+  const { data: user } = useQuery({ queryKey: ["userProfile"] });
+  const friends = user?.followers || [];
 
   return (
     <Box mb={3}>
