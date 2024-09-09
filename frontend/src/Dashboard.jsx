@@ -18,7 +18,7 @@ export default function Dashboard() {
           sx={{ width: 250, position: "sticky", top: 60, alignSelf: "start" }}
         >
           <ProfileCard />
-          <Recommendations />
+          <Recommendations num={2} />
         </Grid>
 
         {/* Post Bar and Feed Column */}
