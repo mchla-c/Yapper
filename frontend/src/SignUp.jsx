@@ -15,7 +15,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import axios from "axios";
 import { theme } from "./components/palette";
-import logo from "./assets/logo.png";
 import { cardStyle } from "./components/styles";
 import { Card, CardContent, CardMedia } from "@mui/material";
 import { AuthCard } from "./components/authcard";
