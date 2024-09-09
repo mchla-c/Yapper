@@ -1,27 +1,22 @@
 import { Link } from "react-router-dom";
-
 import useFollow from "../../hooks/useFollow";
-
 import {
   Typography,
   Box,
   Divider,
   Avatar,
-  Button,
-  Grid,
   IconButton,
   Card,
   CardContent,
 } from "@mui/material";
-
 import AddIcon from "@mui/icons-material/Add";
-
-import React from "react";
+import React, { useState } from "react";
 import { cardStyle, CustomButton } from "../styles";
-
 import { useQuery } from "@tanstack/react-query";
 
-export function Recommendations() {
+export function Recommendations({ num }) {
+  const [displayCount, setDisplayCount] = useState(num);
+
   const { data: suggestedUsers, isLoading } = useQuery({
     queryKey: ["suggestedUsers"],
     queryFn: async () => {
@@ -40,6 +35,8 @@ export function Recommendations() {
 
   const { follow, isPending } = useFollow();
 
+  const displayedUsers = suggestedUsers?.slice(0, displayCount);
+
   return (
     <Card sx={{ ...cardStyle, padding: 2 }}>
       <CardContent>
@@ -48,7 +45,7 @@ export function Recommendations() {
         </Typography>
         <Divider sx={{ mb: 2 }} />
         <>
-          {suggestedUsers?.map((user) => (
+          {displayedUsers?.map((user) => (
             <Box key={user._id} sx={{ mb: 2 }}>
               <Link
                 to={`/profile/${user.username}`}
@@ -96,7 +93,11 @@ export function Recommendations() {
             </Box>
           ))}
         </>
-        <CustomButton href={`/explore`}>More</CustomButton>
+        {suggestedUsers && displayCount < suggestedUsers.length ? (
+          <CustomButton href={`/explore`}>Show More</CustomButton>
+        ) : (
+          <box></box>
+        )}
       </CardContent>
     </Card>
   );

@@ -142,7 +142,7 @@ export const UserButtons = () => {
 
 export const FriendList = () => {
   const { data: user } = useQuery({ queryKey: ["userProfile"] });
-  const friends = user?.followers || [];
+  const friends = user?.following || [];
 
   return (
     <Box mb={3}>
