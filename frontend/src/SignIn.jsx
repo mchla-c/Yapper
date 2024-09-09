@@ -16,7 +16,6 @@ import { useState } from "react";
 import axios from "axios";
 import Palette, { theme } from "./components/palette";
 import { AuthCard } from "./components/authcard";
-import Logo from "./assets/logo.png";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 //const defaultTheme = createTheme();
@@ -72,7 +71,7 @@ export default function SignIn() {
   return (
     <ThemeProvider theme={theme}>
       <AuthCard
-        logosrc={Logo}
+        logosrc="https://res.cloudinary.com/daistfxjs/image/upload/v1725504615/hylygyewelxii1mfbv5w.png"
         title="Welcome back to Yapper!"
         subtitle="Sign in"
       >
