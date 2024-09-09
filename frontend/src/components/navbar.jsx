@@ -13,12 +13,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import { Link } from "react-router-dom";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import {
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
-import logo from '../assets/logo.png'
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ExpandMore } from "@mui/icons-material";
 
 const Search = styled("div")(({ theme }) => ({
@@ -218,21 +213,6 @@ export default function Navbar() {
         }}
       >
         <Toolbar>
-        <Link to="/">
-          <Box
-            component="img"
-            src={logo}
-            alt="logo"
-            sx={{
-              height: 35, 
-              width: 35,  
-              borderRadius: '50%', 
-              objectFit: 'cover', 
-              mr: 2,
-              mt: 1, 
-            }}
-          />
-        </Link>
           <Typography
             variant="h6"
             noWrap
@@ -254,12 +234,9 @@ export default function Navbar() {
             >
               {/* <Badge badgeContent={4} color="error"> */}
               <SearchIcon />
-              <Typography
-              fontWeight={'bold'}
-              sx={{ml: 1}}
-              >
+              <Typography fontWeight={"bold"} sx={{ ml: 1 }}>
                 Explore
-                </Typography>
+              </Typography>
             </IconButton>
             <IconButton
               component={Link}
@@ -269,15 +246,12 @@ export default function Navbar() {
             >
               {/* <Badge badgeContent={4} color="error"> */}
               <EmailOutlinedIcon />
-              <Typography
-              fontWeight={'bold'}
-              sx={{ml: 1}}
-              >
+              <Typography fontWeight={"bold"} sx={{ ml: 1 }}>
                 Messages
-                </Typography>
+              </Typography>
               {/* </Badge> */}
             </IconButton>
-            
+
             <IconButton
               size="large"
               edge="end"
@@ -288,20 +262,15 @@ export default function Navbar() {
               color="inherit"
             >
               <Box
-              component={'img'}
-              src={authUser?.profileImg}
-              sx={{height: 30, 
-                width: 30,}}
-              /> 
-              <Typography
-              fontWeight={'bold'}
-              sx={{ml: 1}}
-              >
+                component={"img"}
+                src={authUser?.profileImg}
+                sx={{ height: 30, width: 30 }}
+              />
+              <Typography fontWeight={"bold"} sx={{ ml: 1 }}>
                 {authUser?.username}
-                </Typography>
-              <ExpandMore/>
+              </Typography>
+              <ExpandMore />
             </IconButton>
-            
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
