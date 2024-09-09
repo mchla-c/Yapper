@@ -25,7 +25,7 @@ export default function Dashboard() {
         <Grid item xs>
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <CreatePost />
-            <Posts />
+            <Posts feedType={"following"} />
           </Box>
         </Grid>
 
