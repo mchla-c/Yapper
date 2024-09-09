@@ -51,8 +51,15 @@ const Posts = ({ feedType, username, userId }) => {
 
   return (
     <>
+      {!isLoading && !isRefetching && feedType === "following" && (
+        <Card sx={{ ...cardStyle, mb: 2, padding: 2 }}>
+          <p>Posts from Friends</p>
+        </Card>
+      )}
       {!isLoading && !isRefetching && posts?.length === 0 && (
-        <p className="text-center my-4">No posts</p>
+        <Card sx={{ ...cardStyle, mb: 2, padding: 2 }}>
+          <p>No posts Available</p>
+        </Card>
       )}
       {!isLoading && !isRefetching && posts && (
         <div>
