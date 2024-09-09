@@ -1,7 +1,7 @@
 import Post from "./Post";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { Card } from "@mui/material";
+import { Card, Typography } from "@mui/material";
 import { cardStyle } from "../styles";
 
 const Posts = ({ feedType, username, userId }) => {
@@ -52,13 +52,17 @@ const Posts = ({ feedType, username, userId }) => {
   return (
     <>
       {!isLoading && !isRefetching && feedType === "following" && (
-        <Card sx={{ ...cardStyle, mb: 2, padding: 2 }}>
-          <p>Posts from Friends</p>
+        <Card sx={{ ...cardStyle, mb: 1, padding: 2 }}>
+          <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
+            Posts from Friends
+          </Typography>
         </Card>
       )}
       {!isLoading && !isRefetching && posts?.length === 0 && (
-        <Card sx={{ ...cardStyle, mb: 2, padding: 2 }}>
-          <p>No posts Available</p>
+        <Card sx={{ ...cardStyle, mb: 1, padding: 2 }}>
+          <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
+            No posts available
+          </Typography>
         </Card>
       )}
       {!isLoading && !isRefetching && posts && (
