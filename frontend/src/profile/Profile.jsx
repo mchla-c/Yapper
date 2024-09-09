@@ -37,6 +37,8 @@ import { useParams } from "react-router-dom";
 import { formatMemberSinceDate } from "../utils/date";
 import useFollow from "../hooks/useFollow";
 
+import Posts from "../components/common/Posts";
+
 export default function Profile() {
   const { username } = useParams();
 
@@ -130,7 +132,7 @@ export default function Profile() {
 
           {/* Mini Navbar for Posts, Likes, and Search */}
           <Box mb={3}>
-            <Card sx={cardStyle}>
+            <Card sx={{ ...cardStyle, mb: 3 }}>
               <CardContent sx={{ display: "flex", alignItems: "center" }}>
                 {/* Tabs for Posts and Likes */}
                 <Tabs
@@ -151,6 +153,11 @@ export default function Profile() {
                 />
               </CardContent>
             </Card>
+            <Posts
+              feedType={tabValue === 1 ? "likes" : "posts"}
+              username={user?.username}
+              userId={user?._id}
+            />
           </Box>
 
           {/* {[1, 2, 3, 4, 5, 6].map((post, index) => (
