@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import './App.css'
 import SignUp from './SignUp'
-import { CssBaseline, Typography } from '@mui/material'
+import { Box, CssBaseline, Typography } from '@mui/material'
 import SignIn from './SignIn'
 import {BrowserRouter, Routes, Route, useLocation, Navigate} from 'react-router-dom'
 import Navbar from './components/navbar'
@@ -15,6 +15,8 @@ import Settings from './settings/Settings'
 import { Toaster } from 'react-hot-toast'
 import { useQuery } from '@tanstack/react-query'
 import MessagesPg from './messages/MessagesPg'
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 function App() {
 
@@ -43,7 +45,9 @@ function App() {
   // MAKE LOADING SCREEN
   if (isLoading) {
     return (
-      <Typography> LOADING SCREEN </Typography>
+      <Box sx={{ display: 'flex' }}>
+        <CircularProgress />
+      </Box>
     )
   }
 

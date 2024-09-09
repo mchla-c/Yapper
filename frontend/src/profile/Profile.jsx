@@ -82,13 +82,7 @@ export default function Profile() {
     setTabValue(newValue);
   };
 
-  const friends = [
-    { name: "Alice", imageUrl: "" },
-    { name: "Bob", imageUrl: "" },
-    { name: "Charlie", imageUrl: "" },
-    { name: "Dave", imageUrl: "" }, // Initials will be shown if no image
-    { name: "Eve", imageUrl: "" },
-  ];
+
 
   return (
     <Box sx={containerStyle}>
@@ -120,7 +114,7 @@ export default function Profile() {
                   {!isPending && amIFollowing && "Unfollow"}
                   {!isPending && !amIFollowing && "Follow"}
                 </CustomButton>
-                <CustomButton>Message</CustomButton>
+                {/* <CustomButton>Message</CustomButton> */}
               </Box>
             )}
           </Box>
@@ -145,12 +139,12 @@ export default function Profile() {
                 </Tabs>
 
                 {/* Search Bar */}
-                <TextField
+                {/* <TextField
                   variant="outlined"
                   size="small"
                   placeholder="Search..."
                   sx={{ marginLeft: "20px", width: "300px" }}
-                />
+                /> */}
               </CardContent>
             </Card>
             <Posts

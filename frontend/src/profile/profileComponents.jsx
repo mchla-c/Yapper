@@ -135,7 +135,7 @@ export const UserButtons = () => {
       <CustomButton component={Link} to="/settings">
         Edit
       </CustomButton>
-      <CustomButton>Share</CustomButton>
+      {/* <CustomButton>Share</CustomButton> */}
     </Box>
   );
 };
