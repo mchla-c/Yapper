@@ -93,10 +93,10 @@ export function Recommendations({ num }) {
             </Box>
           ))}
         </>
-        {suggestedUsers && displayCount < suggestedUsers.length ? (
+        {displayCount < 99 ? (
           <CustomButton href={`/explore`}>Show More</CustomButton>
         ) : (
-          <box></box>
+          <div></div>
         )}
       </CardContent>
     </Card>
